@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import font
 
-link = "https://www.youtube.com/watch?v=rUgAC_Ssflw"
 root = Tk()
 root.title("Text Pad")
 # root.iconbitmap()
