@@ -7,6 +7,7 @@ Python Tkinter notepad
 pip install pyinstaller
 pyinstaller --onefile notepad.py
 
+
 # Screenshots
 
 ![setup](assets/setup.jpg)
