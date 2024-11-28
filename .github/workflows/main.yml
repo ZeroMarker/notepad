@@ -13,10 +13,11 @@ jobs:
         with:
           python_ver: 3.9
           spec: 'src/notepad.py'
+          upload_exe_with_name: 'My executable'
           options: --onefile, --name "Notepad", --windowed,
-      - name: Upload Executable
-        uses: actions/upload-artifact@v4
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          name: Notepad
-          path: dist/Notepad.exe
+          files: dist/Notepad.exe
 
