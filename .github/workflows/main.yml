@@ -13,5 +13,5 @@ jobs:
         with:
           python_ver: 3.9
           spec: 'src/notepad.py'
-          upload_exe_with_name: 'Notepad'
+          upload_exe_with_name: '../dist/Notepad.exe'
           options: --onefile, --name "Notepad", --windowed, 
