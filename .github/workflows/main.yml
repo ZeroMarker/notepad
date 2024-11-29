@@ -15,5 +15,10 @@ jobs:
           spec: 'src/notepad.py'
           upload_exe_with_name: 'My executable'
           options: --onefile, --name "Notepad", --windowed,
-      
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: ./dist/Notepad.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
