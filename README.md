@@ -12,3 +12,5 @@ pyinstaller --onefile notepad.py
 ![setup](assets/setup.jpg)
 
 ![fileMenu](assets/fileMenu.jpg)
+
+
