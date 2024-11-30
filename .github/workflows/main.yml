@@ -15,29 +15,16 @@ jobs:
           spec: 'src/notepad.py'
           upload_exe_with_name: 'Notepad'
           options: --onefile, --name "Notepad", --windowed,
-      - uses: actions/download-artifact@v4
+      - name: Download Zip
+        uses: actions/download-artifact@v4
         with:
           name: Notepad
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
-          draft: false
-          prerelease: false
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Notepad.zip
-          asset_name: Notepad.zip
-          asset_content_type: application/zip
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./dist/Notepad.exe
+          asset_name: Notepad.exe
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
