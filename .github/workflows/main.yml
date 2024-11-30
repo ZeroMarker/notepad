@@ -13,9 +13,12 @@ jobs:
         with:
           python_ver: 3.9
           spec: 'src/notepad.py'
-          upload_exe_with_name: 'My executable'
+          upload_exe_with_name: 'Notepad'
           options: --onefile, --name "Notepad", --windowed,
-      - name: Create release
+      - uses: actions/download-artifact@v4
+        with:
+          name: Notepad
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -27,21 +30,14 @@ jobs:
             Changes in this Release
             - First Change
             - Second Change
-          draft: true
+          draft: false
           prerelease: false
-      - name: Upload release asset
+      - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/Notepad.exe
-          asset_name: Notepad.exe
+          asset_path: ./Notepad.zip
+          asset_name: Notepad.zip
           asset_content_type: application/zip
-      - name: Publish release
-        uses: StuYarrow/publish-release@v1.1.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          id: ${{ steps.create_release.outputs.id }}
-
