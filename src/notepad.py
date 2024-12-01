@@ -17,7 +17,6 @@ selected = False
 
 # Create file function
 
-
 def new_file():
     # Delete previous text
     textBox.delete("1.0", END)
@@ -55,7 +54,6 @@ def open_file():
 
 
 # Save file
-
 
 def save_as_file():
     text_file = filedialog.asksaveasfilename(defaultextension=".*", initialdir=workdir,
@@ -116,7 +114,7 @@ def paste_text(e):
 mainFrame = Frame(root)
 mainFrame.pack(pady=5)
 
-# Creat text box scrollbar
+# Create text box scrollbar
 textScroll = Scrollbar(mainFrame)
 textScroll.pack(side=RIGHT, fill=Y)
 
