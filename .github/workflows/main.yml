@@ -1,0 +1,32 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+jobs:
+  pyinstaller-build:
+    runs-on: windows-latest
+    steps:
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: 3.9
+          spec: 'src/notepad.py'
+          upload_exe_with_name: 'Notepad'
+          options: --onefile, --name "Notepad", --windowed,
+      - name: Download Zip
+        uses: actions/download-artifact@v4
+        with:
+          name: Notepad
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./dist/Notepad.exe
+          asset_name: Notepad.exe
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
